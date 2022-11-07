@@ -1,0 +1,59 @@
+.stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    width: 35px;
+    margin: 0 7px;
+  }
+
+.dotFlashing {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #000000;
+    animation: dotFlashing 1s infinite linear alternate;
+    animation-delay: .5s;
+  }
+
+  .dotFlashing::before, .dotFlashing::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+
+  .dotFlashing::before {
+    left: -12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #000000;
+    animation: dotFlashing 1s infinite alternate;
+    animation-delay: 0s;
+  }
+
+  .dotFlashing::after {
+    left: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #000000;
+    animation: dotFlashing 1s infinite alternate;
+    animation-delay: 1s;
+  }
+
+  @keyframes dotFlashing {
+    0% {
+      background-color: #000000;
+    }
+    50%,
+    100% {
+      background-color: #ebe6ff;
+    }
+  }
