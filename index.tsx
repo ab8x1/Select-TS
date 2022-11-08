@@ -10,7 +10,7 @@ import OnClickOutside from './helpers/onClickOutside'
 
 const emptyItem: inputItem = {label: '', value: '', query: ''};
 
-function Select({items, isSearchable, onChange, Placeholder, isLoading, darkTheme}: SelectProps){
+function Select({items, isSearchable, onChange, Placeholder, isLoading, darkTheme, searchIcon, customStyles}: SelectProps){
     const [listOpened, setListOpened] = useState(false); 
     const [listItems, setListItems] = useState<listItem[]>([]);  //filtered items
     const [selected, setSelected] = useState<number | undefined>(); //currently selected item id 
@@ -102,8 +102,13 @@ function Select({items, isSearchable, onChange, Placeholder, isLoading, darkThem
  
     return(
         <Container ref={listRef}>
-            <Control darkTheme={darkTheme}>
-                {isSearchable && <Magnifier src={magnifierImage.src} onClick={() => search(undefined)}/>}
+            <Control darkTheme={darkTheme} customStyles={customStyles?.['control']}>
+                {searchIcon ? 
+                    <Magnifier src={magnifierImage.src} onClick={() => search(undefined)}/>
+                    : <ArrowContainer onClick={toogleList} customStyles={customStyles?.['arrowContainer']}>
+                            <img src={chevronDown.src}/>
+                    </ArrowContainer>
+                }
                 <InputControl>
                     {!inputItem.query && !placeholderValue && 
                         <PlaceholderContainer>{typeof Placeholder === "string" ? Placeholder : <Placeholder/>}</PlaceholderContainer>
@@ -119,12 +124,8 @@ function Select({items, isSearchable, onChange, Placeholder, isLoading, darkThem
                         onKeyDown={keyDownListener}
                         isSearchable={isSearchable}
                     />
+                    {isLoading ? <Loading/> : inputItem.value && <Clear darkTheme={darkTheme} src={clearImage.src} onClick={clear} alt="Clear input"/>}
                 </InputControl>
-                {isLoading ? <Loading/> : inputItem.value && <Clear darkTheme={darkTheme} src={clearImage.src} onClick={clear} alt="Clear input"/>}
-                {!isSearchable && 
-                    <ArrowContainer onClick={toogleList} customStyles="background-color: rgb(255, 231, 173);">
-                        <img src={chevronDown.src}/>
-                    </ArrowContainer>}
             </Control>
             { listOpened && listItems.length > 0 &&
                 <List 

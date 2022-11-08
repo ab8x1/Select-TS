@@ -15,6 +15,7 @@ export const Control = styled.div<ControlProps>`
     font-size: 1rem;
     padding: 0;
     overflow: hidden;
+    ${({customStyles}) => css`${customStyles}`}
 `;
 
 export const Align = styled.div`
@@ -44,6 +45,8 @@ export const ArrowContainer = styled.div<ArrowContainerProps>`
 
 export const InputControl = styled.div`
     position: relative;
+    display: flex;
+    align-items: center;
     flex: 1;
 `;
 
@@ -81,6 +84,7 @@ export const Clear = styled.img<ClearProps>`
     height: 12px;
     margin: 0 10px;
     cursor: pointer;
+    opacity: 0.7;
     transition: opacity 0.2s ease-in-out;
     ${({darkTheme}) => darkTheme && `
         filter: invert(100%);

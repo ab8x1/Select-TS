@@ -8,13 +8,21 @@ export type inputItem = basicItem & { //query for actual user input
 
 export type listItem = basicItem & {id: number} //id for filtering selected items
 
+export type customStyles = {
+    control?: string,
+    arrowContainer?: string,
+
+}
+
 export type SelectProps = {
     items: listItem[],
-    isSearchable: boolean,
+    isSearchable?: boolean,
     onChange: (item: basicItem | null) => void,
     Placeholder: React.FC | string,
     darkTheme?: boolean,
     isLoading?: boolean,
+    searchIcon?: boolean,
+    customStyles?: customStyles
 }
 
 export type ListProps = {
@@ -27,13 +35,14 @@ export type ListProps = {
 }
 
 export type ControlProps = {
-    darkTheme?: boolean
+    darkTheme?: boolean,
+    customStyles?: string
 }
 
 export type InputProps = {
     onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void,
     onInput: ((e: React.ChangeEvent<HTML>) => void) | undefined,
-    isSearchable: boolean
+    isSearchable?: boolean
 }
 
 export type ClearProps = {
